@@ -33,17 +33,17 @@ async  componentDidMount() {
                 <h2>{this.state.overview}</h2>
                 <h2>{this.state.vote_average}</h2>
                 {/* //вложенный маршрут. кусочек страницы в компаниенты.  */}
-                <Route
-                     //path="/movies/:movieId"
-                     path={`${this.props.match.path}`}
-                    // render={() => <h1>Cast</h1>} />
-                    render={props => {
-                        console.log(props)
+                {/* <Route */}
+                     {/* //path="/movies/:movieId" */}
+                    {/* //  path={`${this.props.match.path}`} */}
+                    {/* // render={() => <h1>Cast</h1>} /> */}
+                    {/* // render={props => { */}
+                    {/* //     console.log(props) */}
 
-                        return <Cast {...props} />
-                    }}
-                // component={Cast}/>
-                />
+                    {/* //     return <Cast {...props} /> */}
+                    {/* }} */}
+                {/* // component={Cast}/> */}
+                {/* /> */}
                 </>
         );
     }
