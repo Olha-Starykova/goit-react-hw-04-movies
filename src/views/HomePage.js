@@ -31,7 +31,6 @@ async  componentDidMount() {
                     {this.state.movies.map(movie => (
                         // <li key={movie.id}>{ movie.title}</li> перенаправляем по динамическому параметру
                         <li key={movie.id}>
-                            {/* <Link to={`/movies/${movie.id}`}>{movie.title}</Link> */}
                             <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
                         </li>
                     ))}

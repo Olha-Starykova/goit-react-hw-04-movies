@@ -9,9 +9,9 @@ import { Route, NavLink, Switch} from 'react-router-dom';
  import HomePage from './views/HomePage';
 import MoviesPage from './views/MoviesPage';
 import './styles.css'
- import MovieDetailsPage from './views/MovieDetailsPage'
-// import BooksView from './views/BooksView';
-// import NotFoundView from './views/NotFoundView'
+import MovieDetailsPage from './views/MovieDetailsPage'
+
+
 
 
 
@@ -31,7 +31,6 @@ const App = () =>
           activeClassName="NavLink-active"
         >Movies
          </NavLink></li>
- 
     </ul>
 
     <Switch>
