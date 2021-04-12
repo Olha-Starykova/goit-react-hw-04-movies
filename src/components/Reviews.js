@@ -28,7 +28,7 @@ class Reviews extends Component  {
                 <ul>
                     {this.state.contents.map(content => (
                                 
-                        <li key={content.id}>
+                        <li key={content.id}> 
                             <p>{content.content}</p>
                                                       
                         </li>
