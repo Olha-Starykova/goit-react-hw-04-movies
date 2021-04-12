@@ -11,10 +11,6 @@ import MoviesPage from './views/MoviesPage';
 import './styles.css'
 import MovieDetailsPage from './views/MovieDetailsPage'
 
-
-
-
-
 const App = () =>
   <>
     <ul>

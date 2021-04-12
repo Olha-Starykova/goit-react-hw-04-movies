@@ -16,9 +16,6 @@ async  componentDidMount() {
       this.setState({movies: response.data.results})
     }
 
-
-
-    
     render() {
         
    // console.log(this.props.match.url)

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
  import  axios  from 'axios';
 import { NavLink, Route } from 'react-router-dom';
- import Cast from '../components/Cast'
+import Cast from '../components/Cast'
+ import Reviews from '../components/Reviews'
 
 class MovieDetailsPage extends Component {
     state = {
-        // movieDetails: [],
         poster_path: '',
         backdrop_path: null,
         homepage: null,
@@ -17,20 +17,20 @@ class MovieDetailsPage extends Component {
 //динамический раут
 async  componentDidMount() {
     const { movieId } = this.props.match.params;
-  console.log("id",movieId)
+ // console.log("id",movieId)
        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=8d4e0a5a0c37d4780eefdf617d0feea1`)
-    console.log("response.data", response.data)
+    //console.log("response.data", response.data)
   this.setState({ ...response.data})
       }
 
     render() {
 
  const { movieId } = this.props.match.params;
-console.log('render', movieId)
+//console.log('render', movieId)
         return (
             
             <>
-                 <h1>cast { this.props.match.params.movieId}</h1>
+                <h1>cast {this.props.match.params.movieId}</h1>
                
                 <img src={this.state.poster_path} alt='' />
                 <img src={`https://image.tmdb.org/t/p/w200/${this.state.poster_path}`} alt='' />
@@ -38,27 +38,34 @@ console.log('render', movieId)
                 <h2>{this.state.overview}</h2>
                 <h2>{this.state.vote_average}</h2>
                 
-                {/* //вложенный маршрут. кусочек страницы в компаниенты.  */}
+                {/* //вложенный маршрут. кусочек страницы в компоненты.  */}
               
-                 <ul>
+                <ul>
                     <li><NavLink
-
                         to={`/movies/${this.state.id}/cast`}
                         className="NavLink"
                         activeClassName="NavLink-active"
-                    >cast
+                    >Cast
                        </NavLink>
                     </li>
-                </ul> 
+                    <li><NavLink
+                        to={`/movies/${this.state.id}/reviews`}
+                        className="NavLink"
+                        activeClassName="NavLink-active"
+                    >Reviews
+                       </NavLink>
+                    </li>
+                </ul>
 
                 <Route
                     path="/movies/:movieId/cast"
-                    //   path={`${this.props.match.path}`} 
-
                     render={props => <Cast {...props} />}
-                //  component={Cast} />
-             
                 />
+                <Route
+                    path="/movies/:movieId/reviews"
+                    render={props => <Reviews {...props} />}
+                />
+
             </>
         );
     }
