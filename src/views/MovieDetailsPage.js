@@ -23,15 +23,23 @@ async  componentDidMount() {
   this.setState({ ...response.data})
       }
 
+ 
+    
+  
+    
     render() {
 
  const { movieId } = this.props.match.params;
 //console.log('render', movieId)
+      //  const { location } = this.props
+       // console.log(location.state.from)
         return (
             
             <>
                 <h1>cast {this.props.match.params.movieId}</h1>
-               
+                <button type="button" onClick={ () =>  this.props.history.push('./')} >
+                    Go back
+                    </button>
                 <img src={this.state.poster_path} alt='' />
                 <img src={`https://image.tmdb.org/t/p/w200/${this.state.poster_path}`} alt='' />
                 <h2>{this.state.title}</h2>

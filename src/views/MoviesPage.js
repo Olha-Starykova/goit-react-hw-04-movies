@@ -19,14 +19,15 @@ class MoviesPage extends Component  {
     
     handleSubmit = (e) => {
         e.preventDefault()
-             const { query } = this.state;
-        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${query}`).then(response => {
+        const { query } = this.state;
+        axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${query}`)
+            .then(response => {
             //  console.log(response.data.results)
-            this.setState({ lists: response.data.results, query: ''})
-           
-        });
+            this.setState({ lists: response.data.results, query: '' })
+            });
         
-    }
+    
+    };
       
  render() {
         
@@ -42,7 +43,9 @@ class MoviesPage extends Component  {
              <ul>
                  {this.state.lists.map((list) =>
                  (<li key={list.id} >
-                     <Link to={`/movies/${list.id}`} >
+                     <Link to={
+                         `/movies/${list.id}`
+                     } >
                          {list.title}
                      </Link>
                  </li>))}
@@ -54,4 +57,12 @@ class MoviesPage extends Component  {
  };
 
 
-export default MoviesPage; 
+export default MoviesPage;
+
+
+    {/* <Link to={{ */}
+                        //  pathname: `/movies/${list.id}`,
+                    //      state: {
+                    //         from: this.props.location,
+                    //    }
+                    //  }} >
