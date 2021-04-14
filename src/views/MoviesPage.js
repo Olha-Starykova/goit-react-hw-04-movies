@@ -4,8 +4,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 
-
-
 class MoviesPage extends Component  {
     state = {
         lists: [],
@@ -20,14 +18,20 @@ class MoviesPage extends Component  {
     handleSubmit = (e) => {
         e.preventDefault()
         const { query } = this.state;
+        const { history } = this.props;
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${query}`)
             .then(response => {
             //  console.log(response.data.results)
             this.setState({ lists: response.data.results, query: '' })
-            });
-        
-    
+            })
+         .then(
+        history.push({
+          pathname: this.props.location.pathname,
+          search: `query=${query}`,
+        }),
+        );
     };
+
       
  render() {
         
@@ -43,9 +47,10 @@ class MoviesPage extends Component  {
              <ul>
                  {this.state.lists.map((list) =>
                  (<li key={list.id} >
-                     <Link to={
-                         `/movies/${list.id}`
-                     } >
+                     <Link to={{
+                         pathname: `/movies/${list.id}`,
+                         state: { from: this.props.location },
+                     }} >
                          {list.title}
                      </Link>
                  </li>))}
@@ -60,9 +65,3 @@ class MoviesPage extends Component  {
 export default MoviesPage;
 
 
-    {/* <Link to={{ */}
-                        //  pathname: `/movies/${list.id}`,
-                    //      state: {
-                    //         from: this.props.location,
-                    //    }
-                    //  }} >

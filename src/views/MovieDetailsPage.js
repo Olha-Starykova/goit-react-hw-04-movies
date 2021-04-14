@@ -31,13 +31,14 @@ async  componentDidMount() {
 
  const { movieId } = this.props.match.params;
 //console.log('render', movieId)
-      //  const { location } = this.props
-       // console.log(location.state.from)
+        const { location } = this.props
+     //   console.log(location.state.from)
+        
         return (
             
             <>
                 <h1>cast {this.props.match.params.movieId}</h1>
-                <button type="button" onClick={ () =>  this.props.history.push('./')} >
+                <button type="button" onClick={ () => this.props.location.state ? this.props.history.push(location.state.from) : this.props.history.push('/')} >
                     Go back
                     </button>
                 <img src={this.state.poster_path} alt='' />
