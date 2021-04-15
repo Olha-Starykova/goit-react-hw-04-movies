@@ -26,8 +26,9 @@ class MoviesPage extends Component  {
             })
          .then(
         history.push({
-          pathname: this.props.location.pathname,
-          search: `query=${query}`,
+           pathname: this.props.location.pathname,
+            search: `query=${query}`,
+            
         }),
         );
     };
@@ -52,6 +53,7 @@ class MoviesPage extends Component  {
                      <Link to={{
                          pathname: `/movies/${list.id}`,
                          state: { from: this.props.location },
+                       
                      }} >
                          {list.title}
                      </Link>

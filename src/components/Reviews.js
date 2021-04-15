@@ -28,17 +28,21 @@ class Reviews extends Component  {
         return (
             <>
 
-                <h1>Reviews {this.props.match.params.movieId}</h1>
+               { (this.state.contents.length > 0) ? (
+             
                 <ul>
                     {this.state.contents.map(content => (
                                 
-                        <li key={content.id}> 
+                        <li key={content.id}>
+                               <b>Author: {content.author}</b>
                             <p>{content.content}</p>
                                                       
                         </li>
                                              
                     ))}
-                </ul>
+                </ul>) : (
+
+                   <span>We don't have any reviews for this movie</span> )}
               
             </>
         );

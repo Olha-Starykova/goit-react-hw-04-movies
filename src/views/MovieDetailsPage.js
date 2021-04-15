@@ -12,7 +12,8 @@ class MovieDetailsPage extends Component {
         vote_average: null,
         overview: null,
         title: null,
-        id: null
+        id: null,
+        genres: null
     };
 //динамический раут
 async  componentDidMount() {
@@ -37,29 +38,41 @@ async  componentDidMount() {
         return (
             
             <>
-                <h1>cast {this.props.match.params.movieId}</h1>
-                <button type="button" onClick={ () => location.state ? this.props.history.push(location.state.from) : this.props.history.push('/')} >
-                  {/* <button type="button" onClick={ () =>  this.props.history.push(location?.state?.from) || this.props.history.push('/')} > */}
-                    Go back 
+             
+                <button type="button" onClick={() => location.state ? this.props.history.push(location.state.from) : this.props.history.push('/')} >
+                    {/* <button type="button" onClick={ () =>  this.props.history.push(location?.state?.from) || this.props.history.push('/')}  */}
+                    Go back
                     </button>
-                <img src={this.state.poster_path} alt='' />
-                <img src={`https://image.tmdb.org/t/p/w200/${this.state.poster_path}`} alt='' />
-                <h2>{this.state.title}</h2>
-                <h2>{this.state.overview}</h2>
-                <h2>{this.state.vote_average}</h2>
-                
+                <div className='MovieDetails'>
+                    <img src={`https://image.tmdb.org/t/p/w200/${this.state.poster_path}`} alt='' />
+                    <div className='MovieDetailsText'>
+                        <h1>{this.state.title}</h1>
+
+                        <p>User Score {this.state.vote_average * 10}% </p>
+
+                        <h3>Overview</h3>
+                        <p>{this.state.overview}</p>
+                        
+                        <h3>Genres</h3>
+                        {this.state.genres && this.state.genres.map(genre => <span key={genre.id}>{genre.name} </span>)}
+                        
+                       
+                 
+                   
+                    </div>
+                </div>
                 {/* //вложенный маршрут. кусочек страницы в компоненты.  */}
               
-                <ul>
+                <ul  className="Additional">
                     <li>
                         <NavLink
-                        to={`/movies/${this.state.id}/cast`}
+                            to={`/movies/${this.state.id}/cast`}
                         
                       
 
-                        className="NavLink"
-                        activeClassName="NavLink-active"
-                    >Cast
+                            className="NavLinkcast"
+                            activeClassName="NavLink-activecast"
+                        >Cast
                        </NavLink>
                     </li>
                     <li>
@@ -69,9 +82,9 @@ async  componentDidMount() {
                      
 
 
-                        className="NavLink"
-                        activeClassName="NavLink-active"
-                    >Reviews
+                            className="NavLinkcast"
+                            activeClassName="NavLink-activecast"
+                        >Reviews
                        </NavLink>
                     </li>
                 </ul>

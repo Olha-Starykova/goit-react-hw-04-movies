@@ -2,10 +2,11 @@ import React from 'react';
 
 import { NavLink } from 'react-router-dom';
 import routes from '../../routes'
+// import '../../styles.css ' 
 
 const Navigation = () => {
     return (
-        <ul>
+        <ul className="Link">
             <li><NavLink
                 exact
                 to={routes.home}

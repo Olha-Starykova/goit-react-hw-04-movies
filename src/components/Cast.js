@@ -27,14 +27,15 @@ class Cast extends Component  {
         return (
                
             <>
-                <h1>cast {this.props.match.params.movieId}</h1>
+             
                 <ul>
                     {this.state.casts.map(cast => (
                                 
                         <li key={cast.id}>
+                      
+                            <img src={`https://image.tmdb.org/t/p/w200/${cast.profile_path}`}  alt='' />
                             <p>{cast.name}</p>
-                            <img src={`https://image.tmdb.org/t/p/w200/${cast.profile_path}`} alt='{cast.name}' />
-                           
+                             <p>Character: {cast.character}</p>
                         </li>
                                              
                     ))}
