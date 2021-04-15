@@ -22,8 +22,12 @@ class Reviews extends Component  {
          
     render() {
      
+  const { location } = this.props
+     console.log("Reviews", location.state)
+
         return (
             <>
+
                 <h1>Reviews {this.props.match.params.movieId}</h1>
                 <ul>
                     {this.state.contents.map(content => (

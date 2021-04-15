@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import  axios  from 'axios';
 import { Link } from 'react-router-dom';
-
-
+ 
 
 class HomePage extends Component  {
     state = {
@@ -19,6 +18,8 @@ async  componentDidMount() {
     render() {
         
    // console.log(this.props.match.url)
+        const { location } = this.props
+        console.log( "HomePage", this.props.location.state)
 
         return (
             <>
@@ -28,7 +29,13 @@ async  componentDidMount() {
                     {this.state.movies.map(movie => (
                         // <li key={movie.id}>{ movie.title}</li> перенаправляем по динамическому параметру
                         <li key={movie.id}>
-                            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
+                            {/* <Link to={`/movies/${movie.id}`}> */}
+                            <Link to={{
+                                pathname: `/movies/${movie.id}`,
+                                state: { from: this.props.location },
+                            }} >
+                                
+                                {movie.title}</Link>
                         </li>
                     ))}
                 </ul>

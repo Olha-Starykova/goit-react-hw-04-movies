@@ -21,6 +21,9 @@ class Cast extends Component  {
      
         render() {
      
+   const { location } = this.props
+     console.log("Cast", location.state)
+
         return (
                
             <>

@@ -36,6 +36,8 @@ class MoviesPage extends Component  {
  render() {
         
      const { query } = this.state;
+    const { location } = this.props
+     console.log("MoviesPage", location.state)
      
      return (
          <>
