@@ -18,29 +18,30 @@ class MovieDetailsPage extends Component {
 //динамический раут
 async  componentDidMount() {
     const { movieId } = this.props.match.params;
- // console.log("id",movieId)
        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=8d4e0a5a0c37d4780eefdf617d0feea1`)
-    //console.log("response.data", response.data)
+
   this.setState({ ...response.data})
       }
 
     
     render() {
 
- const { movieId } = this.props.match.params;
-//console.log('render', movieId)
-        // const { location } = this.props
+        const { location } = this.props
      //   console.log(location.state.from)
-            const { location } = this.props
-        console.log("MovieDetailsPage", location.state)
-        
-
+               
         return (
             
             <>
              
-                <button type="button" onClick={() => location.state ? this.props.history.push(location.state.from) : this.props.history.push('/')} >
-                    {/* <button type="button" onClick={ () =>  this.props.history.push(location?.state?.from) || this.props.history.push('/')}  */}
+                <button
+                    type="button"
+                    onClick={() => {
+                         location.state ? 
+                           this.props.history.push(
+              location.state.from.pathname + location.state.from.search
+            ) : this.props.history.push('/')
+                    }}
+                >
                     Go back
                     </button>
                 <div className='MovieDetails'>
@@ -55,21 +56,15 @@ async  componentDidMount() {
                         
                         <h3>Genres</h3>
                         {this.state.genres && this.state.genres.map(genre => <span key={genre.id}>{genre.name} </span>)}
-                        
-                       
-                 
-                   
+                                                                               
                     </div>
                 </div>
                 {/* //вложенный маршрут. кусочек страницы в компоненты.  */}
               
-                <ul  className="Additional">
+                <ul className="Additional">
                     <li>
                         <NavLink
                             to={`/movies/${this.state.id}/cast`}
-                        
-                      
-
                             className="NavLinkcast"
                             activeClassName="NavLink-activecast"
                         >Cast
@@ -78,10 +73,6 @@ async  componentDidMount() {
                     <li>
                         <NavLink
                             to={`/movies/${this.state.id}/reviews`}
-                            
-                     
-
-
                             className="NavLinkcast"
                             activeClassName="NavLink-activecast"
                         >Reviews
@@ -103,4 +94,9 @@ async  componentDidMount() {
     }
 }
 
-export default MovieDetailsPage; 
+export default MovieDetailsPage;
+
+
+
+                        // location.state ? this.props.history.push(location.state.from) : this.props.history.push('/')} >
+                    // <button type="button" onClick={ () =>  this.props.history.push(location?.state?.from) || this.props.history.push('/')}  

@@ -15,36 +15,67 @@ class MoviesPage extends Component  {
            this.setState({query: e.currentTarget.value})
     }
     
-    handleSubmit = (e) => {
-        e.preventDefault()
-        const { query } = this.state;
-        const { history } = this.props;
+    handleSubmit = (query) => {
+  
+    
+        const { history, location } = this.props;
+    if (!query) {
+      return;
+    } // дописал это условие чтобы не отправляло сабмит с пустой строкой
+
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=8d4e0a5a0c37d4780eefdf617d0feea1&query=${query}`)
             .then(response => {
-            //  console.log(response.data.results)
-            this.setState({ lists: response.data.results, query: '' })
-            })
-         .then(
-        history.push({
-           pathname: this.props.location.pathname,
-            search: `query=${query}`,
+                //  console.log(response.data.results)
+                this.setState({ lists: response.data.results, query: '' })
+          
+       
+                history.push({
+                    pathname: this.props.location.pathname,
+                    search: `query=${query}`,
             
-        }),
-        );
+                });
+                console.log("MoviesPage", location);
+            });
     };
+
+
+      // когда компонент маунтится - мы отправляем еще один сабмит за предыдущей пачкой фильмов
+  componentDidMount() {
+    //   const {search} = this.props.location  деструктуризацияю делать не стал, подумал что так понятнее будет что и откуда берется
+    // ну а вы уже сделаете деструктуризацию
+    console.log(this.props.location.search.split("=")[1]); // тут я просто распарсил search для того чтобы передавать название фильма
+    // без &query= это можно сделать и другими способами, например сохранить
+    // название фильма в state и потом оттуда подтягивать
+    this.handleSubmit(
+      this.props.location.search.split("=")[1] === undefined // тут если у нас есть значение из location.search тогда его подтягиваем
+        ? // а если нет, тогда query из стейта
+          this.state.query
+        : this.props.location.search.split("=")[1]
+    );
+  }
 
       
  render() {
         
-     const { query } = this.state;
-    const { location } = this.props
-     console.log("MoviesPage", location.state)
+    //  const { query } = this.state;
+    // const { location } = this.props
+    //  console.log("MoviesPage", location.state)
      
      return (
          <>
                              
-             <form onSubmit={this.handleSubmit}>
-                 <input type="text" value={this.state.query} onChange={this.handleChange} />
+             <form onSubmit={(e) => {
+
+                 e.preventDefault();
+                 this.handleSubmit(this.state.query)
+
+             }}
+             >
+                 <input
+                     type="text"
+                     value={this.state.query}
+                     onChange={this.handleChange}
+                 />
                  <button type="submit">Искать</button>
              </form>
              <ul>
