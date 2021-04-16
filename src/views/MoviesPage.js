@@ -53,6 +53,7 @@ class MoviesPage extends Component  {
                      <Link to={{
                          pathname: `/movies/${list.id}`,
                          state: { from: this.props.location },
+                     
                        
                      }} >
                          {list.title}
