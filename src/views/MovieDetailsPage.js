@@ -2,7 +2,8 @@ import React, {Component} from 'react';
  import  axios  from 'axios';
 import { NavLink, Route } from 'react-router-dom';
 import Cast from '../components/Cast'
- import Reviews from '../components/Reviews'
+import Reviews from '../components/Reviews'
+ // import defaultImage from '../components/default.jpg'
 
 class MovieDetailsPage extends Component {
     state = {
@@ -19,15 +20,14 @@ class MovieDetailsPage extends Component {
 async  componentDidMount() {
     const { movieId } = this.props.match.params;
        const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}?api_key=8d4e0a5a0c37d4780eefdf617d0feea1`)
-
-  this.setState({ ...response.data})
-      }
+    this.setState({ ...response.data })
+    }
 
     
     render() {
 
-        const { location } = this.props
-     //   console.log(location.state.from)
+        const { location, history } = this.props;
+     const IMG = 'https://image.tmdb.org/t/p/w300';
                
         return (
             
@@ -37,15 +37,15 @@ async  componentDidMount() {
                     type="button"
                     onClick={() => {
                          location.state ? 
-                           this.props.history.push(
+                           history.push(
               location.state.from.pathname + location.state.from.search
-            ) : this.props.history.push('/')
+            ) : history.push('/')
                     }}
                 >
                     Go back
                     </button>
                 <div className='MovieDetails'>
-                    <img src={`https://image.tmdb.org/t/p/w200/${this.state.poster_path}`} alt='' />
+                    <img src={IMG + this.state.poster_path} alt='' />
                     <div className='MovieDetailsText'>
                         <h1>{this.state.title}</h1>
 
@@ -91,8 +91,14 @@ async  componentDidMount() {
 
             </>
         );
-    }
-}
+    };
+};
+
+
+
+
+
+
 
 export default MovieDetailsPage;
 

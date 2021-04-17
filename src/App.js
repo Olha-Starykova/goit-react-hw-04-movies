@@ -5,7 +5,7 @@
 // /movies/:movieId/reviews - компонент <Reviews>, информация об обзорах. Рендерится на странице <MovieDetailsPage>.
 
 import React, {Suspense, lazy} from 'react';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
  //import HomePage from './views/HomePage';
 //import MoviesPage from './views/MoviesPage';
 //import MovieDetailsPage from './views/MovieDetailsPage'

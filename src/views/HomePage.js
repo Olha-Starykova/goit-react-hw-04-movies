@@ -16,23 +16,21 @@ async  componentDidMount() {
     }
 
     render() {
-        
-   // console.log(this.props.match.url)
-        const { location } = this.props
-        console.log( "HomePage", this.props.location.state)
-
+       
+         const { movies } = this.state
+         const { location } = this.props
         return (
             <>
                 <h1>Trending today</h1>
         
                 <ul>
-                    {this.state.movies.map(movie => (
+                    {movies.map(movie => (
                         // <li key={movie.id}>{ movie.title}</li> перенаправляем по динамическому параметру
                         <li key={movie.id}>
                             {/* <Link to={`/movies/${movie.id}`}> */}
                             <Link to={{
                                 pathname: `/movies/${movie.id}`,
-                                state: { from: this.props.location },
+                                state: { from: location },
                             }} >
                                 
                                 {movie.title}</Link>

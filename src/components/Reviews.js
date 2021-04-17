@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
  import  axios  from 'axios';
-import { Link } from 'react-router-dom';
-
 
 
 class Reviews extends Component  {
@@ -22,16 +20,16 @@ class Reviews extends Component  {
          
     render() {
      
-  const { location } = this.props
-     console.log("Reviews", location.state)
+  const { contents } = this.state
+  
 
         return (
             <>
 
-               { (this.state.contents.length > 0) ? (
+               { (contents.length > 0) ? (
              
                 <ul>
-                    {this.state.contents.map(content => (
+                    {contents.map(content => (
                                 
                         <li key={content.id}>
                                <b>Author: {content.author}</b>

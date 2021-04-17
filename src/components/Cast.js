@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
  import  axios  from 'axios';
-import { Link } from 'react-router-dom';
+
 
 
 class Cast extends Component  {
@@ -21,15 +21,14 @@ class Cast extends Component  {
      
         render() {
      
-   const { location } = this.props
-     console.log("Cast", location.state)
 
+const { casts } = this.state
         return (
                
             <>
              
                 <ul>
-                    {this.state.casts.map(cast => (
+                    {casts.map(cast => (
                                 
                         <li key={cast.id}>
                       

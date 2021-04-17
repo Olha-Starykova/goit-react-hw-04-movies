@@ -16,8 +16,6 @@ class MoviesPage extends Component  {
     }
     
     handleSubmit = (query) => {
-  
-    
         const { history, location } = this.props;
     if (!query) {
       return;
@@ -27,65 +25,60 @@ class MoviesPage extends Component  {
             .then(response => {
                 //  console.log(response.data.results)
                 this.setState({ lists: response.data.results, query: '' })
-          
-       
                 history.push({
-                    pathname: this.props.location.pathname,
+                    pathname: location.pathname,
                     search: `query=${query}`,
-            
                 });
-                console.log("MoviesPage", location);
+                // console.log("MoviesPage", location);
             });
     };
 
 
       // когда компонент маунтится - мы отправляем еще один сабмит за предыдущей пачкой фильмов
   componentDidMount() {
-    //   const {search} = this.props.location  деструктуризацияю делать не стал, подумал что так понятнее будет что и откуда берется
+      const { search } = this.props.location
+        const { query } = this.state
+    //  деструктуризацияю делать не стал, подумал что так понятнее будет что и откуда берется
     // ну а вы уже сделаете деструктуризацию
-    console.log(this.props.location.search.split("=")[1]); // тут я просто распарсил search для того чтобы передавать название фильма
+   // console.log(search.split("=")[1]); // тут я просто распарсил search для того чтобы передавать название фильма
     // без &query= это можно сделать и другими способами, например сохранить
     // название фильма в state и потом оттуда подтягивать
     this.handleSubmit(
-      this.props.location.search.split("=")[1] === undefined // тут если у нас есть значение из location.search тогда его подтягиваем
+      search.split("=")[1] === undefined // тут если у нас есть значение из location.search тогда его подтягиваем
         ? // а если нет, тогда query из стейта
-          this.state.query
-        : this.props.location.search.split("=")[1]
+          query
+        : search.split("=")[1]
     );
   }
 
       
  render() {
         
-    //  const { query } = this.state;
-    // const { location } = this.props
-    //  console.log("MoviesPage", location.state)
+     const { query, lists } = this.state;
+     const { location } = this.props;
+ 
      
      return (
          <>
-                             
+                            
              <form onSubmit={(e) => {
-
                  e.preventDefault();
-                 this.handleSubmit(this.state.query)
-
+                 this.handleSubmit(query)
              }}
              >
                  <input
                      type="text"
-                     value={this.state.query}
+                     value={query}
                      onChange={this.handleChange}
                  />
                  <button type="submit">Искать</button>
              </form>
              <ul>
-                 {this.state.lists.map((list) =>
+                 {lists.map((list) =>
                  (<li key={list.id} >
                      <Link to={{
                          pathname: `/movies/${list.id}`,
-                         state: { from: this.props.location },
-                     
-                       
+                         state: { from: location },
                      }} >
                          {list.title}
                      </Link>
