@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+   import PropTypes from "prop-types";
 
 class MoviesPage extends Component  {
     state = {
@@ -87,7 +87,13 @@ class MoviesPage extends Component  {
          </>
      );
     };
- };
+};
+ 
+MoviesPage.propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+};
+
 
 
 export default MoviesPage;

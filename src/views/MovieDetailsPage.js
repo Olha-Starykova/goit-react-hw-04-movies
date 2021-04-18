@@ -4,7 +4,7 @@ import { NavLink, Route } from 'react-router-dom';
 import Cast from '../components/Cast'
 import Reviews from '../components/Reviews'
 import defaultImage from '../components/default.jpg'
-   
+   import PropTypes from "prop-types";
 
 class MovieDetailsPage extends Component {
     state = {
@@ -104,7 +104,10 @@ async  componentDidMount() {
 
 
 
-
+MovieDetailsPage.propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+};
 
 
 

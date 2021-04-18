@@ -23,8 +23,7 @@ class Cast extends Component  {
         render() {
      
             const IMG = 'https://image.tmdb.org/t/p/w300'
-            
-const { casts } = this.state
+            const { casts } = this.state
             return (
                
                 <>
