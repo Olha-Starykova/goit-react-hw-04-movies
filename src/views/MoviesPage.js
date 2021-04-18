@@ -56,8 +56,7 @@ class MoviesPage extends Component  {
         
      const { query, lists } = this.state;
      const { location } = this.props;
- 
-     
+      
      return (
          <>
                             
@@ -71,7 +70,7 @@ class MoviesPage extends Component  {
                      value={query}
                      onChange={this.handleChange}
                  />
-                 <button type="submit">Искать</button>
+                 <button type="submit">Search</button>
              </form>
              <ul>
                  {lists.map((list) =>

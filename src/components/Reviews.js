@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
- import  axios  from 'axios';
+import axios from 'axios';
+ import PropTypes from "prop-types";
 
 
 class Reviews extends Component  {
@@ -22,10 +23,8 @@ class Reviews extends Component  {
      
   const { contents } = this.state
   
-
         return (
             <>
-
                { (contents.length > 0) ? (
              
                 <ul>
@@ -45,6 +44,11 @@ class Reviews extends Component  {
             </>
         );
     };
+};
+
+Reviews.propTypes = {
+    movieId: PropTypes.string,
+  
 };
 
 export default Reviews;

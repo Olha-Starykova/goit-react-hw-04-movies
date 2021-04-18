@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
  import  axios  from 'axios';
-
+import defaultImage from '../components/default.jpg'
+import PropTypes from "prop-types";
 
 
 class Cast extends Component  {
@@ -21,28 +22,34 @@ class Cast extends Component  {
      
         render() {
      
-
+            const IMG = 'https://image.tmdb.org/t/p/w300'
+            
 const { casts } = this.state
-        return (
+            return (
                
-            <>
-             
-                <ul>
-                    {casts.map(cast => (
+                <>
+                    <ul>
+                        {casts.map(cast => (
                                 
-                        <li key={cast.id}>
-                      
-                            <img src={`https://image.tmdb.org/t/p/w200/${cast.profile_path}`}  alt='' />
-                            <p>{cast.name}</p>
-                             <p>Character: {cast.character}</p>
-                        </li>
+                            <li key={cast.id}>
+                     
+                                <img src={ (cast.profile_path) ? (IMG + cast.profile_path) : defaultImage} alt='' />
+                                <p>{cast.name}</p>
+                                <p>Character: {cast.character}</p>
+                            </li>
                                              
-                    ))}
-                </ul>
+                        ))}
+                    </ul>
               
-            </>
-        );
+                </>
+            );
     };
 };
+
+Cast.propTypes = {
+    movieId: PropTypes.string,
+  
+};
+
 
 export default Cast;

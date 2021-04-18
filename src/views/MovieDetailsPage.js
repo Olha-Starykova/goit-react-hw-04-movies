@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import { NavLink, Route } from 'react-router-dom';
 import Cast from '../components/Cast'
 import Reviews from '../components/Reviews'
- // import defaultImage from '../components/default.jpg'
+import defaultImage from '../components/default.jpg'
+   
 
 class MovieDetailsPage extends Component {
     state = {
@@ -27,7 +28,7 @@ async  componentDidMount() {
     render() {
 
         const { location, history } = this.props;
-     const IMG = 'https://image.tmdb.org/t/p/w300';
+     const IMG = 'https://image.tmdb.org/t/p/w300'
                
         return (
             
@@ -36,16 +37,16 @@ async  componentDidMount() {
                 <button
                     type="button"
                     onClick={() => {
-                         location.state ? 
-                           history.push(
-              location.state.from.pathname + location.state.from.search
-            ) : history.push('/')
+                        location.state ?
+                            history.push(
+                                location.state.from.pathname + location.state.from.search
+                            ) : history.push('/')
                     }}
                 >
                     Go back
                     </button>
                 <div className='MovieDetails'>
-                    <img src={IMG + this.state.poster_path} alt='' />
+                    <img src={(this.state.poster_path) ? (IMG + this.state.poster_path) : defaultImage} alt='' />
                     <div className='MovieDetailsText'>
                         <h1>{this.state.title}</h1>
 
@@ -62,9 +63,13 @@ async  componentDidMount() {
                 {/* //вложенный маршрут. кусочек страницы в компоненты.  */}
               
                 <ul className="Additional">
+                    <p> Additional information</p>
                     <li>
                         <NavLink
-                            to={`/movies/${this.state.id}/cast`}
+                            to={{
+                                pathname: `/movies/${this.state.id}/cast`,
+                                state: { from: location.state.from }
+                            }}
                             className="NavLinkcast"
                             activeClassName="NavLink-activecast"
                         >Cast
@@ -72,7 +77,10 @@ async  componentDidMount() {
                     </li>
                     <li>
                         <NavLink
-                            to={`/movies/${this.state.id}/reviews`}
+                            to={{
+                                pathname: `/movies/${this.state.id}/reviews`,
+                                state: { from: location.state.from }
+                            }}
                             className="NavLinkcast"
                             activeClassName="NavLink-activecast"
                         >Reviews
@@ -93,6 +101,7 @@ async  componentDidMount() {
         );
     };
 };
+
 
 
 
